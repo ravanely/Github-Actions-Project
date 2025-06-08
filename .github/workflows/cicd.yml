@@ -67,6 +67,11 @@ jobs:
           cache: maven
       - name: Build Project
         run: mvn package
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/*.jar
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -94,7 +99,7 @@ jobs:
       - name: Download JAR artifact
         uses: actions/download-artifact@v4
         with:
-          name: bankapp-0.0.1-SNAPSHOT.jar #app-jar
+          name: app-jar
           path: app
 
       - name: Login to Docker Hub
